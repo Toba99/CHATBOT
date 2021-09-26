@@ -25,3 +25,6 @@ Run `node server.js`
 
 
 If successful, WebApp should be running on `http://localhost:8080` and server should be running on PORT 7777.
+
+
+# CHECK THE uttrances.yml FILE FOR THE POSSIBLE entries for the chatbot
