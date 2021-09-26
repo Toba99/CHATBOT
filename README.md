@@ -23,6 +23,7 @@ Run `npm run dev`
 
 Run `node server.js`
 
+the server works with the API  `wit.ai`
 
 If successful, WebApp should be running on `http://localhost:8080` and server should be running on PORT 7777.
 
