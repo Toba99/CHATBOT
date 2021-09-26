@@ -1,0 +1,21 @@
+these are a list of uttrances for the project that have been trained:
+
+hello --> greetings
+
+tell me a joke --> jokes
+
+chills, fever, and sweating --> get_malaria
+
+Deep and constant pain in the cheekbones, forehead, or bridge of the nose --> get_headache
+
+high fever, headache, belly pain, and either constipation or diarrhea --> get_typhoid
+
+sneezing, runny nose, and red, watery, and itchy eyes. --> get_hayfever
+
+headache, facial pain, runny nose, and nasal congestion. --> get_sinusitis
+
+runny nose, sneezing, congestion and high fever. --> get_commoncold
+
+back pain --> get_backpain
+
+fever, chills, muscle aches, cough, congestion, runny nose, headaches, and fatigue. --> get_flu
