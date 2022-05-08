@@ -1,15 +1,18 @@
-import './style';
-import { Component } from 'preact';
-import Pusher from 'pusher-js';
-import logo from '../components/Julia.svg';
-import sendbtn from '../components/send.svg';
+import "./style";
+import { Component } from "preact";
+import Pusher from "pusher-js";
+import logo from "../components/Julia.svg";
+import sendbtn from "../components/send.svg";
+import formatDate from "date-fns/lightFormat";
+
+const todaysDate = formatDate(new Date(), "dd-MM-yyyy");
 
 export default class Botpage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      userMessage: '',
-      conversation: [{   user: 'ai',text:"Hey, I am Julia, a Medical Assistant",},{   user: 'ai',text:"Enter your symptoms, e.g (Cough, Headache, e.t.c)",},{   user: 'ai',text:"Here are some common symptoms to assist you: COUGH, RUNNY OR BLOCKED NOSE, FEVER, CHILLS, HEADACHE, SORE THROAT, MUSCLE OR BODY PAIN, NAUSEA, LOSS OF TASTE OR SMELL, TIREDNESS,DIFFICULTY SLEEPING, EARACHE, CONSTIPATION, STOMACH ACHE, TOOTHACHE, BAD BREADTH,  or any other symptoms you may be experiencing",}],
+      userMessage: "",
+      conversation: {},
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -17,23 +20,35 @@ export default class Botpage extends Component {
   }
 
   componentDidMount() {
-    const pusher = new Pusher('5bfb9d1d0dd2482b362e', {
-      cluster: 'us3',
+    const pusher = new Pusher("5bfb9d1d0dd2482b362e", {
+      cluster: "us3",
       encrypted: true,
     });
 
-    const channel = pusher.subscribe('bot');
-    channel.bind('bot-response', data => {
-      const msg = {
-        text: data.message,
-        user: 'ai',
-      };
-      console.log("res",data);
-      
-      this.setState({
-        conversation: [...this.state.conversation, msg],
+    pusher.subscribe("bot").bind("bot-response", this.updateConvo);
+
+    fetch("http://localhost:7777/chats/tobs")
+      .then(resp => {
+        if (!resp.ok) throw new Error("Error fetching conversations");
+
+        resp.json().then(this.initialiseConvo);
       });
+  }
+
+  updateConvo = (message) => {
+    const {conversation} = this.state;
+    const todaysChat = conversation[todaysDate];
+
+    this.setState({
+      conversation: {
+        ...conversation,
+        [todaysDate]: [...todaysChat, message]
+      }
     });
+  }
+
+  initialiseConvo = conversation => {
+    this.setState({ conversation });
   }
 
   handleChange(event) {
@@ -44,79 +59,81 @@ export default class Botpage extends Component {
     if (event) {
       event.preventDefault();
     }
-    console.log("hjhshjds")
-    const msg = {
-      text: this.state.userMessage,
-      user: 'user',
-    };
 
-    this.setState({
-      conversation: [...this.state.conversation, msg],
-    });
+    if (!this.state.userMessage) return;
 
-    fetch('http://localhost:7777/chat', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+    fetch("http://localhost:7777/chats", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         message: this.state.userMessage,
       }),
     });
-
-    this.setState({ userMessage: '' });
+    this.setState({ userMessage: "" });
   }
 
   render() {
-    const ChatBubble = (text, i, className) => {
-      const classes = `${className} chat-bubble`;
-      return (
-        <div key={`${className}-${i}`} class={`${className} chat-bubble`}>
-          <span class="chat-content">{text}</span>
-        </div>
+    const {conversation} = this.state;
+    console.log({conversation});
+    const chatHistory = Object.keys(this.state.conversation).map(day => 
+        <>
+          <p className="day">{day}</p>
+          {conversation[day].map(convo => ChatBubble(convo.message, convo.timestamp, convo.sender))}
+        </>
       );
-    };
-
-    const chat = this.state.conversation.map((e, index) =>
-      ChatBubble(e.text, index, e.user)
-    );
 
     return (
       <div class="body__box">
-        
         <div class="header">
           <div class="header__logo-box">
             <img class="header__logo" alt="Julia's Image" src={logo} />
           </div>
           <div class="header__text-box">
-            <div class="header__text-primary"><p>Julia</p></div>
- 
-           
-            <div class="header__text-secondary"><p>online</p></div>
+            <div class="header__text-primary">
+              <p>Julia</p>
+            </div>
+
+            <div class="header__text-secondary">
+              <p>online</p>
+            </div>
           </div>
         </div>
         <div class="conversation__box">
-          <div class="conversation-view">{chat}</div>
+          <div class="conversation-view">{chatHistory}</div>
           <div class="input__box">
             <div>
-            <form onSubmit={this.handleSubmit}>
-              <input
-                value={this.state.userMessage}
-                onInput={this.handleChange}
-                class="text__input"
-                type="text"
-                autofocus
-                placeholder="Type your message"
-              />
-            </form>
+              <form onSubmit={this.handleSubmit}>
+                <input
+                  value={this.state.userMessage}
+                  onInput={this.handleChange}
+                  class="text__input"
+                  type="text"
+                  autofocus
+                  placeholder="Type your message"
+                />
+              </form>
             </div>
             <div>
               <div class="send__btn-box">
-                <img onClick={this.handleSubmit} class="send__btn" alt="send button" src={sendbtn}/>
+                <img
+                  onClick={this.handleSubmit}
+                  class="send__btn"
+                  alt="send button"
+                  src={sendbtn}
+                />
               </div>
             </div>
-            
           </div>
         </div>
       </div>
     );
   }
 }
+
+function ChatBubble(message, timestamp, sender) {
+  return (
+    <div class={`${sender} chat-bubble`}>
+      <span class="chat-content">{message}<span class={`time ${sender}`}>{formatDate(new Date(timestamp), 'hh:mma')}</span></span>
+    </div>
+  );
+};

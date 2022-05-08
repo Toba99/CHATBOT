@@ -74,6 +74,19 @@
 	max-width: 90%;
   }
   
+	.chat-content .time {
+		font-size: 10px;
+		color: grey;
+		display: block;
+	}
+
+	.time.user {
+		color: #dddddd;
+	}
+
+	.time.ai {
+		color: #808080;
+	}
   
   html {
 	  font-size: 62.5%; 
@@ -308,7 +321,5 @@
 	  width: 75vw;
 	}
   }
-  
-  
-  
+
   

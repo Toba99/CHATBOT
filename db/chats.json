@@ -1,0 +1,24 @@
+{
+  "tobs": [
+    {
+      "timestamp": "2022-05-08T17:41:10.807Z",
+      "message": "Hola",
+      "sender": "user"
+    },
+    {
+      "timestamp": "2022-05-08T17:42:10.807Z",
+      "message": "Hola Amigo, Que tal?",
+      "sender": "ai"
+    },
+    {
+      "timestamp": "2022-05-04T17:41:10.807Z",
+      "message": "Hallöchen",
+      "sender": "user"
+    },
+    {
+      "timestamp": "2022-05-04T17:42:10.807Z",
+      "message": "Wie gehts?",
+      "sender": "ai"
+    }
+  ]
+}
