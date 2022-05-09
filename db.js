@@ -15,8 +15,14 @@ function loaddb() {
 }
 
 function saveChat(newChat, user) {
-  chats = {...chats, [user]: [...chats[user], newChat] };
+  const usersChat = chats[user] || [];
+  chats = {...chats, [user]: [...usersChat, newChat] };
   persistChats(chats);
+}
+
+function findUser(username, password) {
+  const user = users.find(user => user.username === username && user.password === password);
+  return user || null;
 }
 
 function persistData(filename) {
@@ -63,4 +69,4 @@ function getConverstationStarter() {
   ];
 }
 
-module.exports = { loaddb, getUserChatHistory, saveChat };
+module.exports = { loaddb, getUserChatHistory, saveChat, findUser };
