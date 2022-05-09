@@ -4,6 +4,7 @@ import Pusher from "pusher-js";
 import logo from "../components/Julia.svg";
 import sendbtn from "../components/send.svg";
 import formatDate from "date-fns/lightFormat";
+import { route } from "preact-router";
 
 const todaysDate = formatDate(new Date(), "dd-MM-yyyy");
 
@@ -19,6 +20,12 @@ export default class Botpage extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  componentWillMount() {
+    if (!this.props.loggedInUser) {
+      route("/login", true);  
+    }
+  }
+
   componentDidMount() {
     const pusher = new Pusher("5bfb9d1d0dd2482b362e", {
       cluster: "us3",
@@ -27,7 +34,7 @@ export default class Botpage extends Component {
 
     pusher.subscribe("bot").bind("bot-response", this.updateConvo);
 
-    fetch("http://localhost:7777/chats/tobs")
+    fetch(`http://localhost:7777/chats/${this.props.loggedInUser}`)
       .then(resp => {
         if (!resp.ok) throw new Error("Error fetching conversations");
 
@@ -67,6 +74,7 @@ export default class Botpage extends Component {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         message: this.state.userMessage,
+        loggedInUser: this.props.loggedInUser
       }),
     });
     this.setState({ userMessage: "" });
@@ -74,8 +82,7 @@ export default class Botpage extends Component {
 
   render() {
     const {conversation} = this.state;
-    console.log({conversation});
-    const chatHistory = Object.keys(this.state.conversation).map(day => 
+    const chatHistory = Object.keys(conversation).map(day => 
         <>
           <p className="day">{day}</p>
           {conversation[day].map(convo => ChatBubble(convo.message, convo.timestamp, convo.sender))}
@@ -87,6 +94,8 @@ export default class Botpage extends Component {
         <div class="header">
           <div class="header__logo-box">
             <img class="header__logo" alt="Julia's Image" src={logo} />
+            <span>{this.props.loggedInUser}</span>
+            <button onClick={() => this.props.logoutUser()}>Logout</button>
           </div>
           <div class="header__text-box">
             <div class="header__text-primary">

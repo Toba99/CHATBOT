@@ -7,7 +7,7 @@ const { Wit } = require("node-wit");
 
 const Pusher = require("pusher");
 const req = require("express/lib/request");
-const { loaddb, getUserChatHistory, saveChat } = require("./db");
+const { loaddb, getUserChatHistory, saveChat, findUser } = require("./db");
 const responses = require("./responsefile").responses;
 const recommendations = require("./responsefile").recommendations;
 const symptoms = require("./responsefile").symptoms;
@@ -29,27 +29,27 @@ const client = new Wit({
 
 loaddb();
 const app = express();
-
 app.use(cors({ origin: "*" }));
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.post("/chats", (req, res) => {
-  const { message } = req.body;
-  createUserMessage(message, "tobs");
+  const { message, loggedInUser } = req.body;
+  createUserMessage(message, loggedInUser);
 
   client
     .message(message)
     .then((resp) => {
       const intent = findIntent(resp);
-      sendIntentResponses(intent);
+      sendIntentResponses(intent, loggedInUser);
       res.json({ message: "successful" });
     })
     .catch((error) => {
       res.json({});
       createSystemMessage(
         "I am currently offline. Please try again later",
-        "tobs"
+        loggedInUser
       );
       console.log(error);
     });
@@ -60,6 +60,17 @@ app.get("/chats/:id", (req, res) => {
   const chat = getUserChatHistory(userId);
   res.json(chat);
 });
+
+app.post("/login", (req, res) => {
+  const {username, password} = req.body;
+  const user = findUser(username, password);
+  if (user) {
+    res.json({loggedInUser: user.username});
+  } else {
+    res.statusCode = 401;
+    res.json({});
+  }
+})
 
 app.set("port", process.env.PORT || 7777);
 const server = app.listen(app.get("port"), () => {
@@ -73,7 +84,7 @@ function createUserMessage(message, loggedInUser) {
     sender: "user",
   };
   broadcastMessage(chatMessage);
-  saveChat(chatMessage, "tobs");
+  saveChat(chatMessage, loggedInUser);
 }
 
 function createSystemMessage(message, loggedInUser) {
@@ -83,22 +94,22 @@ function createSystemMessage(message, loggedInUser) {
     sender: "ai",
   };
   broadcastMessage(chatMessage);
-  saveChat(chatMessage, "tobs");
+  saveChat(chatMessage, loggedInUser);
 }
 
 function broadcastMessage(chatMessage) {
   pusher.trigger("bot", "bot-response", chatMessage);
 }
 
-function sendIntentResponses(intent) {
+function sendIntentResponses(intent, loggedInUser) {
   if (intent.includes("get")) {
     [responses, recommendations, symptoms, causes, drugs].forEach((section, index) => {
       const message = section[intent][Math.floor(Math.random() * section[intent].length)];
-      setTimeout(() => createSystemMessage(message), 2000 * index);
+      setTimeout(() => createSystemMessage(message, loggedInUser), 2000 * index);
     });
   } else {
     const message = responses[intent][Math.floor(Math.random() * responses[intent].length)];
-    createSystemMessage(message);
+    createSystemMessage(message, loggedInUser);
   }
 }
 
