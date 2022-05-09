@@ -6,6 +6,7 @@ import './style';
   import { Router } from 'preact-router';
   import Homepage from './homepage'
   import Botpage from './botpage'
+  import Loginpage from './loginpage';
     
   export default class App extends Component {
 
@@ -17,6 +18,7 @@ import './style';
         <Router >
          <Homepage path="/" />
          <Botpage path="/julia" />
+         <Loginpage path="/login" />
         </Router>
        </div>
       );
