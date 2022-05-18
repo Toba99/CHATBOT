@@ -58,10 +58,10 @@ const symptoms = {
     "SYMPTOMS: The symptoms of typhoid fever usually develop 1 or 2 weeks after a person becomes infected with the Salmonella typhi bacteria. The main symptoms of typhoid fever are: a HEADACHE, a HIGH TEMPERATURE, gerneral ACHES AND PAINS, CONSTIPATION, and later on STOMACH ACHE and DIARRHOEA",
   ],
   get_hayfever: [
-    "SYMPTOMS: Symptoms of hay fever include: SNEEZING AND COUGHING, RUNNY OR BLOCKED NOSE, ITCHY, RED or WATERY EYES, ITCHY THROAT, NOSE AND EARS, LOSS OF SMELL, PAIN AROUND YOUR TEMPLES AND FOREHEAD, HEADACHE, EARACHE, TIREDNESS. If you have Asthma, you might also: have atight feeling in your chest, be short of breadth, wheeze and cough.",
+    "SYMPTOMS: Symptoms of hay fever include: SNEEZING AND COUGHING, RUNNY OR BLOCKED NOSE, ITCHY, RED or WATERY EYES, ITCHY THROAT, NOSE AND EARS, LOSS OF SMELL, PAIN AROUND YOUR TEMPLES AND FOREHEAD, HEADACHE, EARACHE, TIREDNESS. If you have Asthma, you might also: have atight feeling in your chest, be short of breath, wheeze and cough.",
   ],
   get_sinusitis: [
-    "SYMPTOMS: Sinusitis is common after a cold or flu. Symptoms of sinusitis include: PAIN, SWELLING and TENDERNESS around your CHEEKS, EYES and FOREHEAD, a BLOCKED NOSE, a reduced SENSE OF SMELL, GREEN or YELLOW MUCHUS FROM NOSE, a SINUS HEADACHE, a HIGH TEMPERATURE, TOOTHACHE, BAD BREADTH.",
+    "SYMPTOMS: Sinusitis is common after a cold or flu. Symptoms of sinusitis include: PAIN, SWELLING and TENDERNESS around your CHEEKS, EYES and FOREHEAD, a BLOCKED NOSE, a reduced SENSE OF SMELL, GREEN or YELLOW MUCHUS FROM NOSE, a SINUS HEADACHE, a HIGH TEMPERATURE, TOOTHACHE, BAD BREATH.",
   ],
   get_commoncold: [
     "SYMPTOMS: Cold symptoms come on gradually and can include: a BLOCKED OR RUNNY NOSE, a SORE THROAT, HEADACHE, MUSCLE ACHE, COUGH, SNEEZING, a RAISED TEMPERATURE, pressure in youyr eyes and ears, loss of taste and smell",

@@ -115,6 +115,23 @@
 	  margin: 10px;
   
   }
+
+  .loggedInUser{
+	  margin-top: 20px;
+	  margin-left: 600px;
+	  font-size: 20px;
+	  font-weight: 600;
+	  color:#3F5CEE;
+  }
+  .logoutbutton{
+	  width: 100px;
+	  margin-top: 10px;
+	  margin-left: 700px;
+	  cursor:pointer;
+	  font-size: 20px;
+	  font-weight: 400;
+	  color: red;
+  }
   
   .header__log {
 	  height: 60px;
@@ -326,7 +343,6 @@
     justify-content: center;
     height: 600px;
     width: 40%;
-    box-shadow: 11px 12px 13px 12px rgb(207, 207, 207);
     padding-top: 30px;
     border-radius: 60px; 
     background-color: white;
@@ -337,7 +353,7 @@
       display: flex;
     }
   .container-image {
-    background-color: rgb(223, 221, 221); 
+    background-color: rgba(126,185,229,255); 
     border-radius: 150px;
     align-items: center;
     display: flex;
@@ -369,7 +385,7 @@
   }
 
   .name{
-      padding-left: 70px;
+      padding-left: 20px;
       font-size: 20px;
   }
   .second-input{
@@ -380,20 +396,23 @@
       width: 380px;
       height: 50px;
       border-radius: 60px;
-      background-color: #b103fc;
+      background-color: rgba(126,185,229,255);
       color: white;
       font-size: 25px;
       border: none;
+	  cursor:pointer;
   }
   .login-button{
       padding-top: 25px;
   }
 
   .link{
+	  padding-top: 20px;
       font-size: 25px;
       font-weight: 400;
+	  color: red;
   }
    a{
-       color: blue;
+	color: rgba(126,185,229,255);
    }
   

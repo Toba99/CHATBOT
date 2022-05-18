@@ -51,19 +51,19 @@ export default class Loginpage extends Component {
                  </div>
                  <div>
                    <h1>Login Page</h1>
-                   <div>
-                     <img src={mainlogo} alt="email" className="email"/>
+                   <div className="second-input">
+                     {/* <img src={mainlogo} alt="email" className="email"/> */}
                      <input type="text" placeholder="user name" className="name" value={username} onChange={e => this.setState({username: e.target.value})}/>
                    </div>
                    <div className="second-input">
-                     <img src={mainlogo} alt="pass" className="email"/>
+                     {/* <img src={mainlogo} alt="pass" className="email"/> */}
                      <input type="password" placeholder="password" className="name" value={password} onChange={e => this.setState({password: e.target.value})}/>
                    </div>
                   <div className="login-button">
                   <button onClick={this.handleLogin}>Login</button>
                   </div>  
                     <p className="link">
-                      <a href="#">Forgot password ?</a> Or<a href="#">Sign Up</a>
+                      <a href="#">Forgot password?</a> Or <a href="#">Sign Up</a>
                     </p>
                     <p style={{color: 'red'}}>{error}</p>
                  </div>

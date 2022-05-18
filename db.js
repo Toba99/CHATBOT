@@ -63,7 +63,7 @@ function getConverstationStarter() {
     {
       sender: "ai",
       message:
-        "Here are some common symptoms to assist you: COUGH, RUNNY OR BLOCKED NOSE, FEVER, CHILLS, HEADACHE, SORE THROAT, MUSCLE OR BODY PAIN, NAUSEA, LOSS OF TASTE OR SMELL, TIREDNESS,DIFFICULTY SLEEPING, EARACHE, CONSTIPATION, STOMACH ACHE, TOOTHACHE, BAD BREADTH,  or any other symptoms you may be experiencing",
+        "Here are some common symptoms to assist you: COUGH, RUNNY OR BLOCKED NOSE, FEVER, CHILLS, HEADACHE, SORE THROAT, MUSCLE OR BODY PAIN, NAUSEA, LOSS OF TASTE OR SMELL, TIREDNESS,DIFFICULTY SLEEPING, EARACHE, CONSTIPATION, STOMACH ACHE, TOOTHACHE, BAD BREATH,  or any other symptoms you may be experiencing",
       timestamp: new Date(),
     },
   ];

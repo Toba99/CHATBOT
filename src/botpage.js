@@ -94,8 +94,6 @@ export default class Botpage extends Component {
         <div class="header">
           <div class="header__logo-box">
             <img class="header__logo" alt="Julia's Image" src={logo} />
-            <span>{this.props.loggedInUser}</span>
-            <button onClick={() => this.props.logoutUser()}>Logout</button>
           </div>
           <div class="header__text-box">
             <div class="header__text-primary">
@@ -106,6 +104,8 @@ export default class Botpage extends Component {
               <p>online</p>
             </div>
           </div>
+          <span class="loggedInUser">{this.props.loggedInUser}</span>
+          <button class="logoutbutton" onClick={() => this.props.logoutUser()}>Logout</button>
         </div>
         <div class="conversation__box">
           <div class="conversation-view">{chatHistory}</div>
