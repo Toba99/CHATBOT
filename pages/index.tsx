@@ -1,83 +1,89 @@
-import React from 'react'
+import React, { useCallback } from 'react'
+import Text, { headline1 } from '../components/Text'
 import Container from '../components/Container'
 import Layout from '../components/Layout'
-import ProductCard from '../components/ProductCard'
-import { Carousel } from 'react-responsive-carousel'
-import { getProducts } from '../api/products'
-import { Product } from '../types'
-import {formatToCurrency} from '../utils/utils'
+import { logIn } from '../api/auth/'
+import cogoToast from 'cogo-toast';
+import { updateLoginData, getLoginData } from '../store/reducers/registerUser'
+import { useAppDispatch, useAppSelector } from '../hooks/hooks'
 
-
-const slider = [
-  { product_id: 1, name: "bere", image: "https://storage.googleapis.com/web_don/laraluxury/public/image/slider/Screenshot%202022-03-16%20at%2012.40.51%20PM.png" },
-  { product_id: 2, name: "bere", image: "https://storage.googleapis.com/web_don/laraluxury/public/image/slider/Screenshot%202022-03-16%20at%2012.42.27%20PM.png" },
-  { product_id: 3, name: "bere", image: "https://storage.googleapis.com/web_don/laraluxury/public/image/slider/Screenshot%202022-03-16%20at%2012.43.01%20PM.png" },
-]
-
-type HomeProps = {
-  products: Product[]
+// "text-gray-700 font-bold mb-2 lg:mb-4 text-center lg:text-left"
+type loginData = {
+  email: string
+  password: string
 }
+const Carts = () => {
 
-const Home = ({ products }: HomeProps) => {
-  
+  const formData = useAppSelector(getLoginData)
+  const dispatch = useAppDispatch()
+  const setData = useCallback((newData: loginData) => {
+    dispatch(updateLoginData(newData))
+  }, [])
+
+
   return (
-  <Layout page={false} title={'Home'}>
-    <Container
-      className="flex flex-col lg:flex-row lg:pt-10 lg:pb-6 "
-      as="section"
-    >
-      <Carousel className='w-full ' showThumbs={false} showArrows={false} showStatus={false} preventMovementUntilSwipeScrollTolerance={false}>
-        {slider.map((slid, i) => <a key={slid.product_id} href="/item">  <img className='rounded-lg shadow-lg h-44 lg:h-96 ' src={slid.image} /> </a>)}
+    <Layout page={false} title={'Home'}>
 
-      </Carousel>
-    </Container>
+      <div className="lg:mt-2 pt-4 pb-8 lg:pb-24">
+        <Container className="flex flex-col">
+          <Text as="h2" theme={headline1} className="self-center text-gray-700">
+            Login
+          </Text>
+        </Container>
 
+        <Container
+          as="ul"
+          className=" mt-4 justify-center items-center"
+        >
+          <div className='flex justify-center'>
+            <Text as="h2" className="self-center text-gray-400">
+              Enter your email and password to login
+            </Text>
 
-    <div className="bg-white py-4 lg:py-8">
-      <Container >
+          </div>
 
-        <p className=" flex justify-center w-full text-center mt-6">
-          <label className=" w-full lg:w-1/2 relative block">
-            <span className="sr-only">Search</span>
-            <span className="absolute inset-y-0 left-0 flex items-center pl-2">
-              <i className=" h-5 w-5 fas fa-search  fill-slate-300 "></i>
-            </span>
-            <input className="placeholder:italic placeholder:text-slate-400 block bg-white w-full border border-slate-300 rounded-md py-2 pl-9 pr-3 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm" placeholder="Search for anything..." type="text" name="search" />
-           
-          </label>
-        </p>
-      </Container>
-    </div>
+          <div className='flex flex-col content-center items-center justify-start min-h-screen'>
+            <label className="block my-1">
+              <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
+                Email
+              </span>
+              <input type="email" name="email" value={formData.email} onChange={(e) => setData({ ...formData, email: e.target.value })} className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1" placeholder="you@example.com" />
+            </label>
+            <label className="block my-1">
+              <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
+                PassWord
+              </span>
+              <input type="email" name="email" value={formData.password} onChange={(e) => setData({ ...formData, password: e.target.value })} className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1" placeholder="you@example.com" />
+            </label>
+            <button className='bg-blue-500 text-white my-1 mx-1 px-4 py-1 lg:ml-6 hover:bg-blue-400 h-9 flex rounded-lg justify-center mx-2 text-xl'
+            onClick={async ()=>{
+              const regRes = await logIn(formData);
+              if (regRes.status === false) {
+                if (regRes.data && Array.isArray(regRes.data)) {
+                 regRes.data.forEach(er => {
+                   cogoToast.error(er);
+                  });
+                }else cogoToast.error(regRes.message)
+              
+              }else{
+                console.log(regRes);
+                
+               cogoToast.success(regRes.message).then (()=> location.replace('/chat'));
+               
+              }
+            }}
+            >
+              Login
+            </button>
+          </div>
 
-    <div className=" pt-4 pb-8 lg:pb-24">
-      <Container
-        as="ul"
-        className="flex flex-wrap justify-center items-start"
-      >
+        </Container>
 
-        {/* product section  */}
-        {products.map(({id, image, name, amount, description, meta}) => <ProductCard key={id} id={id} image={image} name={name}  amount={formatToCurrency(amount)} description={description} type={meta.type}/>)}
+      </div >
 
-      </Container>
-
-    </div>
-
-  </Layout>
-)}
-
-Home.getInitialProps = async (): Promise<HomeProps> => {
-  let products: Product[]
-  try {
-    let response = await getProducts()
-    products = response.data.products
-    
-  } catch (e) {
-    console.error(e)
-    products = []
-  }
-  return {
-    products: products,
-  }
+    </Layout >
+  )
 }
 
-export default Home
+
+export default Carts

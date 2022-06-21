@@ -2,7 +2,7 @@ import Axios, { AxiosResponse } from 'axios'
 import { ApiResponse } from '../types'
 
 const axios = Axios.create({
-  baseURL: "http://127.0.0.1:3001",
+  baseURL: "http://127.0.0.1:1337/api",
   headers: {
     Accept: 'application/json',
     'Content-Type': 'application/json',
@@ -21,14 +21,9 @@ type Requester = {
 const extractResponse = (axiosResponse: Promise<AxiosResponse>) => {
   return axiosResponse
     .then(({ data }) => data)
-    .catch((error) => {
-      if (error.response) {
-        throw error.response.data
-      }
-      throw error
-    })
+    .catch((error) => error.response.data ? error.response.data : console.log(error))
 }
-//  ssh -i clement.cer ubuntu@35.172.217.94
+
 const requester: Requester = {
   get(...args) {
     return extractResponse(axios.get(...args))

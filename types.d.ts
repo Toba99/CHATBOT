@@ -38,10 +38,15 @@ export type ApiError<T = {}> = ApiResponse<
     form: { [key: string]: string }
   }
 >
-
+export type Chat = {
+  status: any
+  data: any
+  message: string
+}
 export type AuthState = {
-  token: string
-  user: User
+  status: any
+  data: any
+  message: string
 }
 
 declare module 'axios' {
@@ -52,19 +57,6 @@ declare module 'axios' {
   }
 }
 
-export interface Product {
-  id: string
-  category_id: string
-  sub_category_id: string
-  name: string
-  amount: number
-  description: string
-  quantity_available: string
-  image: string
-  type: string
-  meta: any
-  created_at: string
-}
 
 
 

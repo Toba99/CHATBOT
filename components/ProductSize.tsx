@@ -3,7 +3,7 @@ import classNames from 'classnames'
 import { css } from '@emotion/css'
 import Text from './Text'
 import { useAppDispatch } from '../hooks/hooks'
-import { selectSize } from '../store/reducers/cart'
+import { selectSize } from '../store/reducers/registerUser'
 
 const ProductSize = (props) => {
   const dispatch = useAppDispatch()

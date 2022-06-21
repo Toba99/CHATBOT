@@ -5,13 +5,13 @@ import Text, { headline1 } from '../components/Text'
 import Container from '../components/Container'
 import Layout from '../components/Layout'
 import moment from 'moment'
-import { selecteItem, deleteFromCart, getCart } from '../store/reducers/cart'
+import { selecteItem, deleteFromCart, getCart } from '../store/reducers/registerUser'
 import { useAppDispatch, useAppSelector } from '../hooks/hooks'
 import Icon from '../components/Icon'
 
 // "text-gray-700 font-bold mb-2 lg:mb-4 text-center lg:text-left"
 
-const Carts = () => {
+const Chat = () => {
 
 
 
@@ -96,4 +96,4 @@ const Carts = () => {
 }
 
 
-export default Carts
+export default Chat

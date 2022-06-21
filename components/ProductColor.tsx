@@ -3,7 +3,7 @@ import classNames from 'classnames'
 import { css } from '@emotion/css'
 import Text from './Text'
 import { useAppDispatch } from '../hooks/hooks'
-import { selectColor } from '../store/reducers/cart'
+import { selectColor } from '../store/reducers/registerUser'
 
 const ProductColor = (props) => {
   

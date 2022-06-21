@@ -6,9 +6,6 @@ import { useResponsive } from '../helpers/hooks'
 import Button from './Button'
 import Container from './Container'
 import Link from './Link'
-import { css } from '@emotion/css'
-import { useAppSelector } from '../hooks/hooks'
-import { getCart } from '../store/reducers/cart'
 
 type NavLink = { name: string; href?: string; options?: NavLink[] }
 
@@ -150,7 +147,6 @@ const Header = ({ page }: { page: boolean }) => {
   }, [])
   const { md } = useResponsive()
 
-  const cart = useAppSelector(getCart)
   return (
     <div className="py-4">
       <Container
@@ -169,14 +165,9 @@ const Header = ({ page }: { page: boolean }) => {
           </NextLink>
 
           <div className='flex justify-end'>
-            <NextLink href={'/carts'}>
-              <a href={'/carts'}>
-                <div className="bg-blue-500 text-white my-1 mx-1 px-4 py-1 lg:ml-6 hover:bg-blue-400 h-9 flex rounded-lg justify-center mx-2 text-xl">Login</div>
-              </a>
-            </NextLink>
-            <NextLink href={'/carts'}>
-              <a href={'/carts'}>
-                <div className="bg-green-500 text-white my-1 mx-1 px-4 py-1 lg:ml-6 hover:bg-green-400 h-9 flex rounded-lg justify-center mx-2 text-xl">Register</div>
+            <NextLink href={'/register'}>
+              <a href={'/register'}>
+                <div className="bg-blue-500 text-white my-1 mx-1 px-4 py-1 lg:ml-6 hover:bg-blue-400 h-9 flex rounded-lg justify-center mx-2 text-xl">Register</div>
               </a>
             </NextLink>
           </div>
