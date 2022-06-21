@@ -156,11 +156,7 @@ const Header = ({ page }: { page: boolean }) => {
         <div className="flex justify-between w-full">
           <NextLink href={'/'}>
             <a href={'/'}>
-              <img
-                className="h-16 w-40 md:w-56 object-contain"
-                src="https://storage.googleapis.com/web_don/laraluxury/public/image/lara_logo.jpeg"
-                alt="Lara Luxury Logo"
-              />
+             
             </a>
           </NextLink>
 

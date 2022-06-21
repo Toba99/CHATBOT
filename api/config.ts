@@ -1,11 +1,19 @@
 import Axios, { AxiosResponse } from 'axios'
 import { ApiResponse } from '../types'
+let token
+if (typeof window !== 'undefined') {
+  const authData = JSON.parse(localStorage.getItem("auth") || '');
+  if (authData.token) {
+    token = authData.token
+  }
+}
 
 const axios = Axios.create({
   baseURL: "http://127.0.0.1:1337/api",
   headers: {
     Accept: 'application/json',
     'Content-Type': 'application/json',
+    Authorization: `Bearer ${token}`
   },
 })
 

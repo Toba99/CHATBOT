@@ -17,7 +17,7 @@ const Footer = () => {
       )}>
         <Container className="flex justify-center py-4">
           <Text className="text-sm md:text-base text-gray-500">
-            © Copyright {currentYear} LARA LUXURY LTD.
+            © Copyright {currentYear} Julia LTD.
           </Text>
           <Text className="text-sm md:text-base text-gray-500">
             All Rights Reserved.

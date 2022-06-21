@@ -67,7 +67,7 @@ const Carts = () => {
               
               }else{
                 console.log(regRes);
-                
+                localStorage.setItem("auth", JSON.stringify(regRes.data))
                cogoToast.success(regRes.message).then (()=> location.replace('/chat'));
                
               }

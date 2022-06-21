@@ -15,11 +15,8 @@ const Layout = ({ page, title, children }) => {
         return (
           <>
             <Head>
-              <title>Lara Luxury | {title}</title>
-              <link
-                rel="icon"
-                href="https://storage.cloud.google.com/web_don/laraluxury/public/image/lara_logo.jpeg"
-              />
+              <title>Julia | {title}</title>
+             
               <script src="https://js.paystack.co/v1/inline.js" />
             </Head>
             

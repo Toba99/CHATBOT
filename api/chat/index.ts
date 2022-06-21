@@ -1,12 +1,8 @@
-import { Product, } from '../../types'
+import { Chat, } from '../../types'
 import { requester } from '../config'
 
+export const getChat = () =>
+  requester.get(`/chat/`)
 
-export const getProducts = () =>
-  requester.get<{ products: Product[] }>(`/api/products/`)
-
-export const getProductsDetails = (id: string) =>
-  requester.get<{ products: Product[] }>(`/api/products/${id}`)
-
-export const StaffDeleteCV = (formData: { orderid: string }) =>
-  requester.post(`/staff/delete-cv`, formData, { alertErrorMessage: true })
+export const sendChat = (formData: { message: string }) =>
+  requester.post(`/chat/`, formData, { alertErrorMessage: true })
