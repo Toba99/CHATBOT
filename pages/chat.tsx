@@ -104,7 +104,7 @@ const Chat = () => {
                 placeholder="Enter Message......"
                 id=""
               />
-              <button``
+              <button
                 onClick={async () => { await sendChat({ message }).then((re) => cogoToast.success(re.message).then(() => {
                   dispatch(updateMessage(""))
                   loadAllMessage()})) }}
