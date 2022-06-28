@@ -156,7 +156,11 @@ const Header = ({ page }: { page: boolean }) => {
         <div className="flex justify-between w-full">
           <NextLink href={'/'}>
             <a href={'/'}>
-             
+            <img
+                className="h-16 w-40 md:w-56 object-contain"
+                src="https://www.packit.eu/wp-content/uploads/2019/08/julia-logo-pms-5255-c.png"
+                alt="Julia"
+              />
             </a>
           </NextLink>
 

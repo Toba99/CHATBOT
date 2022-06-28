@@ -36,7 +36,7 @@ const initialState = {
             id : "0",
             user_id : "1",
             peer_user_id : "1",
-            message : "welcome",
+            message : "Hey i am Julia, a Medical Assistant! Please enter your symptoms",
             status : "send",
             created_at : new Date
         }

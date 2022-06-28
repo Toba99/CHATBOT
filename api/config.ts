@@ -2,9 +2,11 @@ import Axios, { AxiosResponse } from 'axios'
 import { ApiResponse } from '../types'
 let token
 if (typeof window !== 'undefined') {
-  const authData = JSON.parse(localStorage.getItem("auth") || '');
-  if (authData.token) {
-    token = authData.token
+  if (localStorage.getItem("auth")) {
+    const authData = JSON.parse(localStorage.getItem("auth") || '');
+    if (authData.token) {
+      token = authData.token
+    }
   }
 }
 

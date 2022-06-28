@@ -31,6 +31,7 @@ const Layout = ({ page, title, children }) => {
             >
               {`
                 #__next {
+                  background-color:rgba(170,225,255,255);
                   display: flex;
                   flex-direction: column;
                   min-height: ${windowHeight}px;

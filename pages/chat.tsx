@@ -29,13 +29,15 @@ const Chat = () => {
 
   useEffect(() => {
     let userData
-    const authData = JSON.parse(localStorage.getItem("auth") || '');
+    if (localStorage.getItem("auth")) {
+      const authData = JSON.parse(localStorage.getItem("auth") || '');
     if (authData.user) {
       userData = authData.user
     }
     if (userData) {
       dispatch(updateUserData(userData))
     }
+    }  
   }, [])
 
   console.log("chat data", chatData);
@@ -57,10 +59,10 @@ const Chat = () => {
 
           <div className='mx-6 border border-indigo-600'>
 
-            {chatData?.map((daa) => user.id === daa.user_id ? <div className="my-2 ">
+            {chatData?.map((daa) => user.id === daa.user_id ? <div className="my-2 text-right">
               <div
                 className={classNames(
-                  'bg-gray-300 text-gray-800 px-2 rounded-lg',
+                  'bg-gray-300 text-gray-800 text-right px-2 rounded-lg',
                   css`
      background-color: #e9f4ff;
    `,
@@ -71,10 +73,10 @@ const Chat = () => {
               <span className="text-xs mx-2">
                 {moment(daa.created_at).format('MM/DD/YYYY h:mm a')}
               </span>
-            </div> : <div className="my-2 text-right ">
+            </div> : <div className="my-2  ">
               <div
                 className={classNames(
-                  'bg-gray-300  text-gray-800 text-right px-2 rounded-lg',
+                  'bg-gray-300  text-gray-800 px-2 rounded-lg',
                   css`
                 background-color: #1286ff42;
               `,
@@ -102,11 +104,11 @@ const Chat = () => {
                 placeholder="Enter Message......"
                 id=""
               />
-              <button
+              <button``
                 onClick={async () => { await sendChat({ message }).then((re) => cogoToast.success(re.message).then(() => {
                   dispatch(updateMessage(""))
                   loadAllMessage()})) }}
-                className="bg-blue-500 rounded-lg focus:outline-none hover:bg-blue-400"
+                className="bg-blue-500 rounded-lg focus:outline-none hover:bg-blue-400" style={{width:100}}
               >
                 {'send '}
                 <Icon name="chevron-right" className="mx-3" size={18} />

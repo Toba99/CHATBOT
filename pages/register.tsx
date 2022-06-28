@@ -37,13 +37,13 @@ const Register = () => {
           className=" mt-4 justify-center items-center"
         >
           <div className='flex justify-center'>
-            <Text as="h2" className="self-center text-gray-400">
-              provide all required information to get you set up
+            <Text as="h2" className="self-center text-black-400">
+              PROVIDE ALL REQUIRED INFORMATION TO GET YOU SETUP
             </Text>
 
           </div>
 
-          <div className='flex flex-col content-center items-center justify-start min-h-screen'>
+          <div className='flex flex-col content-center items-center justify-start'>
             <label className="block my-1">
               <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
                 First Name
@@ -66,7 +66,7 @@ const Register = () => {
               <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
                 PassWord
               </span>
-              <input type="email" name="password" value={formData.password} onChange={(e) => setData({ ...formData, password: e.target.value })} className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1" placeholder="q.wde@eht421" />
+              <input type="password" name="password" value={formData.password} onChange={(e) => setData({ ...formData, password: e.target.value })} className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1" placeholder="q.wde@eht421" />
             </label>
             <button className='bg-blue-500 text-white my-1 mx-1 px-4 py-1 lg:ml-6 hover:bg-blue-400 h-9 flex rounded-lg justify-center mx-2 text-xl'
               onClick={async () => {
@@ -81,17 +81,23 @@ const Register = () => {
                }else{
                  console.log(regRes);
                  
-                cogoToast.success(regRes.message).then (()=> location.replace('/chat'));
+                cogoToast.success(regRes.message).then (()=> location.replace('/'));
                 
                }
                
               }}
             >
-              Login
+              Register
             </button>
           </div>
 
-
+          <a>
+            <img
+                className="h-81 w-80" style={{backgroundColor: 'rgba(170,225,255,255)'}}
+                src="https://www.vector-eps.com/wp-content/gallery/cartoon-woman-doctors-and-nurses-vector/cartoon-woman-doctors-and-nurses-vector5.jpg"
+                alt="Julia"
+              />
+            </a>
 
 
         </Container>
