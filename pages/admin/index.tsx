@@ -1,11 +1,11 @@
 import React, { useCallback } from 'react'
-import Text, { headline1 } from '../components/Text'
-import Container from '../components/Container'
-import Layout from '../components/Layout'
-import { logIn } from '../api/auth/'
+import Text, { headline1 } from '../../components/Text'
+import Container from '../../components/Container'
+import Layout from '../../components/Layout'
+import { logIn } from '../../api/auth/'
 import cogoToast from 'cogo-toast';
-import { updateLoginData, getLoginData } from '../store/reducers/registerUser'
-import { useAppDispatch, useAppSelector } from '../hooks/hooks'
+import { updateLoginData, getLoginData } from '../../store/reducers/registerUser'
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks'
 
 // "text-gray-700 font-bold mb-2 lg:mb-4 text-center lg:text-left"
 type loginData = {
@@ -27,7 +27,7 @@ const Carts = () => {
       <div className="lg:mt-2 pt-4 pb-8 lg:pb-24">
         <Container className="flex flex-col">
           <Text as="h2" theme={headline1} className="self-center text-gray-700">
-            Login
+            Admin Login
           </Text>
         </Container>
 
@@ -37,7 +37,7 @@ const Carts = () => {
         >
           <div className='flex justify-center'>
             <Text as="h2" className="self-center text-black-400">
-              ENTER YOUR EMAIL AND PASSWORD TO LOGIN
+              ENTER YOUR ADMIN EMAIL AND PASSWORD TO LOGIN
             </Text>
 
           </div>

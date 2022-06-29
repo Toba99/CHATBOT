@@ -8,7 +8,7 @@ const WindowHeight = dynamic(() => import('../components/WindowHeight'), {
   ssr: false,
 })
 
-const Layout = ({ page, title, children }) => {
+const Layout = ({ login, title, children }:{login : boolean ; title: string; children: any}) => {
   return (
     <WindowHeight>
       {(windowHeight) => {
@@ -20,7 +20,7 @@ const Layout = ({ page, title, children }) => {
               <script src="https://js.paystack.co/v1/inline.js" />
             </Head>
             
-            <Header page={page} />
+            <Header login={login} />
          
             {children}
             <Footer />

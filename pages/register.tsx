@@ -23,7 +23,7 @@ const Register = () => {
   }, [])
 
   return (
-    <Layout page={false} title={'Login'}>
+    <Layout page={true} title={'Login'}>
 
       <div className="lg:mt-2 pt-4 pb-8 lg:pb-24">
         <Container className="flex flex-col">

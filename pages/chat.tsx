@@ -31,19 +31,22 @@ const Chat = () => {
     let userData
     if (localStorage.getItem("auth")) {
       const authData = JSON.parse(localStorage.getItem("auth") || '');
-    if (authData.user) {
-      userData = authData.user
+      if (authData.user) {
+        userData = authData.user
+      }
+      if (userData) {
+        dispatch(updateUserData(userData))
+      } else {
+        location.replace('/')
+      }
+    } else {
+      location.replace('/')
     }
-    if (userData) {
-      dispatch(updateUserData(userData))
-    }
-    }  
   }, [])
 
-  console.log("chat data", chatData);
 
   return (
-    <Layout page={false} title={'Login'}>
+    <Layout login={true} title={'Login'}>
 
       <div className="lg:mt-2 pt-4 pb-8 lg:pb-24">
         <Container className="flex flex-col">
@@ -59,7 +62,7 @@ const Chat = () => {
 
           <div className='mx-6 border border-indigo-600'>
 
-            {chatData?.map((daa) => user.id === daa.user_id ? <div className="my-2 text-right">
+            {chatData?.map((daa, index) => user.id === daa.user_id ? <div key={index} className="my-2 text-right">
               <div
                 className={classNames(
                   'bg-gray-300 text-gray-800 text-right px-2 rounded-lg',
@@ -73,7 +76,7 @@ const Chat = () => {
               <span className="text-xs mx-2">
                 {moment(daa.created_at).format('MM/DD/YYYY h:mm a')}
               </span>
-            </div> : <div className="my-2  ">
+            </div> : <div key={index} className="my-2  ">
               <div
                 className={classNames(
                   'bg-gray-300  text-gray-800 px-2 rounded-lg',
@@ -105,10 +108,13 @@ const Chat = () => {
                 id=""
               />
               <button
-                onClick={async () => { await sendChat({ message }).then((re) => cogoToast.success(re.message).then(() => {
-                  dispatch(updateMessage(""))
-                  loadAllMessage()})) }}
-                className="bg-blue-500 rounded-lg focus:outline-none hover:bg-blue-400" style={{width:100}}
+                onClick={async () => {
+                  await sendChat({ message }).then((re) => cogoToast.success(re.message).then(() => {
+                    dispatch(updateMessage(""))
+                    loadAllMessage()
+                  }))
+                }}
+                className="bg-blue-500 rounded-lg focus:outline-none hover:bg-blue-400" style={{ width: 100 }}
               >
                 {'send '}
                 <Icon name="chevron-right" className="mx-3" size={18} />

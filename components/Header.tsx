@@ -134,7 +134,7 @@ const Dropdown = ({ name, options }: DropdownProps) => {
   )
 }
 
-const Header = ({ page }: { page: boolean }) => {
+const Header = ({ login }: { login: boolean }) => {
   const [showNav, setShowNav] = useState(false)
   // const [showFindJob, setshowFindJob] = useState(false)
 
@@ -156,21 +156,22 @@ const Header = ({ page }: { page: boolean }) => {
         <div className="flex justify-between w-full">
           <NextLink href={'/'}>
             <a href={'/'}>
-            <img
+              <img
                 className="h-16 w-40 md:w-56 object-contain"
                 src="https://www.packit.eu/wp-content/uploads/2019/08/julia-logo-pms-5255-c.png"
                 alt="Julia"
               />
             </a>
           </NextLink>
+          {login === true ? "" :
+            <div className='flex justify-end'>
+              <NextLink href={'/register'}>
+                <a href={'/register'}>
+                  <div className="bg-blue-500 text-white my-1 mx-1 px-4 py-1 lg:ml-6 hover:bg-blue-400 h-9 flex rounded-lg justify-center mx-2 text-xl">Register</div>
+                </a>
+              </NextLink>
+            </div>}
 
-          <div className='flex justify-end'>
-            <NextLink href={'/register'}>
-              <a href={'/register'}>
-                <div className="bg-blue-500 text-white my-1 mx-1 px-4 py-1 lg:ml-6 hover:bg-blue-400 h-9 flex rounded-lg justify-center mx-2 text-xl">Register</div>
-              </a>
-            </NextLink>
-          </div>
 
 
 

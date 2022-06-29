@@ -1,4 +1,3 @@
-import { Chat, } from '../../types'
 import { requester } from '../config'
 
 export const getChat = () =>

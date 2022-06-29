@@ -1,6 +1,5 @@
 import type { AppState } from '../../store'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { type } from 'os'
 type formData = {
     firstName: string
     lastName: string
@@ -11,14 +10,7 @@ type loginData = {
     email: string
     password: string
 }
-// type chatData = [{
-//     id : string
-//     user_id : string
-//     peer_user_id : string
-//     message : string
-//     status : string
-//     created_at : string
-// }]
+
 
 const initialState = {
     formdData: {
@@ -44,7 +36,8 @@ const initialState = {
     message: '',
     userData :{
         id: "0",
-    }
+    },
+    allUsers: []
 
 }
 
@@ -69,12 +62,15 @@ export const cartSlice = createSlice({
         updateMessage: (state, action: PayloadAction<string>) => {
             state.message = action.payload
         },
+        updateAllUser: (state, action: PayloadAction<any>) => {
+            state.allUsers = action.payload
+        },
 
     },
 
 })
 
-export const { updateFormData, updateLoginData, updateChatData, updateMessage, updateUserData } = cartSlice.actions
+export const { updateFormData, updateLoginData, updateChatData, updateMessage, updateUserData, updateAllUser } = cartSlice.actions
 
 export const getFormData = (state: AppState) => state.registerUser.formdData;
 
@@ -85,5 +81,7 @@ export const getChatData = (state: AppState) => state.registerUser.chatData;
 export const getMessage = (state: AppState) => state.registerUser.message; 
 
 export const getUser = (state: AppState) => state.registerUser.userData;
+
+export const getAllUser = (state: AppState) => state.registerUser.allUsers;
 
 export default cartSlice.reducer
