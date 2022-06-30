@@ -7,14 +7,20 @@ import { getAllUsers } from '../../api/admin/index'
 import { getAllUser, updateAllUser } from '../../store/reducers/registerUser'
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks'
 
-const Carts = () => {
+const AdminCarts = () => {
 
   const allUsers = useAppSelector(getAllUser)
   const dispatch = useAppDispatch()
 
 
   useEffect(() => {
-    getAllUsers().then((res) => dispatch(updateAllUser(res.data.users)))
+    getAllUsers().then((res) => {
+
+      if (res.data.users) {
+        dispatch(updateAllUser(res.data.users))
+      }
+
+    })
 
   }, [])
   return (
@@ -71,4 +77,4 @@ const Carts = () => {
 }
 
 
-export default Carts
+export default AdminCarts
