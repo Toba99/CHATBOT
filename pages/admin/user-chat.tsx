@@ -41,10 +41,10 @@ const Chat = () => {
 
           <div className='mx-6 border border-indigo-600'>
 
-            {chatData?.map((daa, index) => '1' === `${daa.user_id}` ? <div key={index} className="my-2 text-right">
+            {chatData?.map((daa, index) => '1' === `${daa.user_id}` ? <div key={index} className="my-2 ">
               <div
                 className={classNames(
-                  'bg-gray-300 text-gray-800 text-right px-2 rounded-lg',
+                  'bg-gray-300 text-gray-800  px-2 rounded-lg',
                   css`
      background-color: #e9f4ff;
    `,
@@ -55,10 +55,10 @@ const Chat = () => {
               <span className="text-xs mx-2">
                 {moment(daa.created_at).format('MM/DD/YYYY h:mm a')}
               </span>
-            </div> : <div key={index} className="my-2  ">
+            </div> : <div key={index} className="my-2 text-right">
               <div
                 className={classNames(
-                  'bg-gray-300  text-gray-800 px-2 rounded-lg',
+                  'bg-gray-300  text-gray-800 px-2 text-right rounded-lg',
                   css`
                 background-color: #1286ff42;
               `,
@@ -75,6 +75,12 @@ const Chat = () => {
            
           </div>
 
+          <div>
+            <button className='bg-blue-500 text-white my-1 mx-1 px-4 py-1 lg:ml-6 hover:bg-blue-400 h-9 flex rounded-lg justify-center mx-2 text-xl' 
+              onClick={async () => {window.print()}} style={{marginTop:30}}> 
+              Download/Print 
+            </button>
+          </div>
         </Container>
 
       </div >
